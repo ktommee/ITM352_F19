@@ -1,0 +1,61 @@
+body {
+    width: 600px;
+    margin: 0 auto; 
+    background: url(images/phone_globe.jpg) no-repeat 50% center;
+}
+
+p {
+    text-align: center;
+    font: "Times";
+    font-size: 14px;
+    font-style: normal;
+    color:purple
+}
+
+
+h1,h2 {
+    text-align: center;
+    color: black
+}
+
+img {
+    display: block;
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    padding: 5px;
+    width: 200px;
+    height: 200px
+}
+
+img:hover {
+    box-shadow: 0 0 5px 5px rebeccapurple;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around; 
+
+}   
+
+div {
+    border: 10px dotted black;
+    display: flex
+}
+
+
+.rotate img
+{
+  animation: rotation .3s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
