@@ -143,7 +143,9 @@
             <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
             <td width="54%">
                 <script>
-                    document.write ($subtotal.toFixed(2));
+                      Subtotal = $subtotal;
+                      template = `\$${Subtotal}`;
+                      document.write (template);
                 </script>
             </td>
           </tr>
@@ -151,7 +153,9 @@
             <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ 5.75%</span></td>
             <td width="54%">
                 <script>
-                    document.write ($tax.toFixed(2));
+                    Tax = $tax;
+                    template = `\$${Tax.toFixed(2)}`;
+                    document.write (template);
                 </script>
             </td>
           </tr>
@@ -159,7 +163,9 @@
             <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
             <td width="54%"><strong>
                 <script>
-                        document.write ($total.toFixed(2));
+                        Total = $total;
+                        template = `\$${Total.toFixed(2)}`;
+                        document.write (template);
                 </script>
             </strong></td>
           </tr>
