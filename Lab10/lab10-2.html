@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var fav_foods = [ [ 'Pasta'], ['Pizza'], 
+                    ['Peaches'], ['Strawberries']];
+        outStr = "<table border = 1>";
+        for (i = 0; i< fav_foods.length; i++) {
+            outStr += "<tr>"
+            outStr += "<td>" + fav_foods[i] + "</td>";
+            outStr += "</tr>";
+        }
+        outStr += "</table>";
+        document.write(outStr);
+    </script>
+</body>
+</html>
+
+
