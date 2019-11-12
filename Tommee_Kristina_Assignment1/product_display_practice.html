@@ -1,0 +1,75 @@
+<script>
+products = 
+[
+    {  
+    "product":"Apple",  
+    "price": 1.50, 
+    "variety": "Fuji", 
+    "image": "https://raw.githubusercontent.com/ktommee/ITM352_F19/master/Tommee_Kristina_Assignment1/images/apple.jpg" 
+    },
+    {  
+    "product":"Orange",  
+    "price": 1.79,  
+    "variety": "Blood Orange",
+    "image": "https://github.com/ktommee/ITM352_F19/blob/master/Tommee_Kristina_Assignment1/images/orange.jpg"
+    },
+    {  
+      "product":"Papaya",  
+      "price": 3.65,  
+      "variety": "Solo",
+      "image": "https://github.com/ktommee/ITM352_F19/blob/master/Tommee_Kristina_Assignment1/images/papaya.jpg"
+    },
+    {  
+      "product":"Peach",  
+      "price": 2.09,  
+      "Variety": "Donut",
+      "image": "https://github.com/ktommee/ITM352_F19/blob/master/Tommee_Kristina_Assignment1/images/peach.jpg"
+    },
+    {  
+      "product":"Kiwi",  
+      "price": 0.75,  
+      "Variety": "North Island Brown",
+      "image": "https://github.com/ktommee/ITM352_F19/blob/master/Tommee_Kristina_Assignment1/images/kiwi.jpg"
+    }
+  ]; 
+  
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simply Fruit Baskets</title>
+</head>
+<body>
+    <form name = "quantity_form" action=" " method = "GET">
+        <header>
+            <h1 style="color: palevioletred">Simply Fruit Baskets</h1>
+    
+            <h2 style="color:cornflowerblue">Pick your fruits!</h2>
+        </header>
+    <div>
+        <main>
+            <script>
+                for (i = 0; i < products.length; i++) {
+                    document.write(`
+                    <section class="item">
+                    <h2>${products[i].product}</h2>
+                    <p>$${products[i].price}</p>
+                    <img src="${products[i].image}">
+                    </section>
+        `);
+                        }
+            </script>
+        </main>
+    </div>
+    </form>
+</body>
+</html>
+
+
+
+
+
