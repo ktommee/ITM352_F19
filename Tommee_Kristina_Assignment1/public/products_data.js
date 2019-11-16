@@ -1,4 +1,5 @@
-
+// Author: Kristina Tommee
+// Description: This is the product information that will be used for both the product_display.html and product_invoice.html pages.
 var products = 
 [
     {  
@@ -33,6 +34,8 @@ var products =
         }
   ]; 
   
+  // Source: Port Assignment 1 Example 
+  // returns the products when it is required in another page
   if(typeof module != 'undefined') {
     module.exports.products = products;
   }
