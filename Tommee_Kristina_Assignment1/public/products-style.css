@@ -1,0 +1,119 @@
+ /* General */
+ 
+
+ html {
+  
+    font-family: 'Marker Felt', fantasy;
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMsNkvqj4KPQ0i4QW3Z6Mpg0HdnAuV-PFPM0EZQTT3sLuQcJ92) repeat 100% center;
+    font-size: 15px;
+    
+  }
+  
+  body {
+    width: 800px;
+    margin: 0 auto;
+    background-color: rgb(255, 241, 159);
+  }
+  
+  /* Typography */
+  
+  
+  h1, h2 {
+    
+    font-family: 'Apple chancery';
+    margin: 0;
+    text-align: center;
+    
+  }
+  
+  
+  h1 {
+    font-size: 35pt;
+    color: palevioletred; 
+  }
+  
+  h2 {
+    font-size: 25pt;
+    color:cornflowerblue;
+    text-shadow: 2px 2px 1px white;
+  }
+  
+  
+  /* block styling */
+  
+  
+  header, main, footer {
+    padding: 20px;
+  }
+  
+  header {
+    border: 10px dotted rgb(253, 198, 94);
+    border-bottom: 0;
+  }
+  
+  footer {
+    border: 10px dotted rgb(253, 198, 94);
+    border-top: 0;
+    text-align: center;
+  }
+  
+  footer h1 {
+    font-style: italic;
+    font-size: 3rem;
+  }
+
+  footer h3 {
+    font-size: 15px;
+    color: darksalmon
+  }
+  
+  aside {
+    flex: 3;
+  }
+  
+  main {
+    flex: 7;
+  }
+  
+  /* table formatting styling */
+  th {
+    background-color: rgb(166, 234, 255);
+    color: black
+  }
+  
+  tr  {
+    background-color:rgb(255, 208, 255);
+    font-size: 20px;
+    color: brown
+  }
+  
+  /*  Form styling */
+  
+  main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  
+  /* Styling the images */
+  
+  img {
+    display: block;
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    padding: 5px;
+    width: 200px;
+    height: 200px;
+  
+  }
+
+  img:hover {
+    box-shadow: 0 0 5px 5px rebeccapurple;
+}
+
+  footer img {
+    width: 100px;
+    height: 100px;
+  }
