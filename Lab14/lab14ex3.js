@@ -60,7 +60,7 @@ app.post("/login", function (request, response) {
             //check if valid username exists
             if(user_reg_data[POST.username] != undefined) // username exist in user registration data
             {
-                if (POST.password == user_reg_data [POST.username].password)
+                if (POST.password == user_reg_data [POST.username].password) // the password correctly corresponds to the defined username in the registration data
                     {
                         console.log("Got a good password!");
                     }
