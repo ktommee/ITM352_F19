@@ -13,8 +13,8 @@ if (fs.existsSync(filename))  // if the file exists
 //read and output the contents
 {
     var raw_data = fs.readFileSync(filename, 'utf-8');
-    var user_reg_data = JSON.parse(raw_data);
-    console.log(user_reg_data);
+    var users_reg_data = JSON.parse(raw_data);
+    console.log(users_reg_data);
 
 
     fstats = fs.statSync(filename); // data structure that tells you about the file
@@ -58,9 +58,9 @@ app.post("/login", function (request, response) {
         {
             // user submitted userid and password. test them for validity
             //check if valid username exists
-            if(user_reg_data[POST.username] != undefined) // username exist in user registration data
+            if(users_reg_data[POST.username] != undefined) // username exist in user registration data
             {
-                if (POST.password == user_reg_data [POST.username].password) // the password correctly corresponds to the defined username in the registration data
+                if (POST.password == users_reg_data [POST.username].password) // the password correctly corresponds to the defined username in the registration data
                     {
                         console.log("Got a good password!");
                     }
