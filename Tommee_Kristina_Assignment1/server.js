@@ -5,36 +5,50 @@
 var express = require('express');
 var app = express();
 var myParser = require("body-parser");
-var products = require("./public/products_data.js");
+var products = require("./public/products.json");
 var querystring = require('querystring');
+var fs = require('fs'); // require readFileSync;
 
-app.use(myParser.urlencoded({extended: true}));
-app.post("./product_display.html", function(request,response) {
-// Code to handle POST from products display
+app.use(myParser.urlencoded({ extended: true }));
+app.post("/product_display.html", function (request, response) {
+  // Code to handle POST from products display
   let POST = request.body;
   var contents = fs.readFileSync('./views/product_invoice.html', 'utf8');
   receipt = '';
+  has_errors = false;
+  total_qty = 0;
+  quantities = [];
   // loop through products.js array
-  for (i=0; i < products.length; i++) 
-    if (POST[`quantity${i}`]) {
-      a_qty = POST[`quantity${i}`];
-      quantity_form[`quantity${i}`].value = a_qty;
-      total_qty += a_qty;
-       if (!isNonNegInt(a_qty)) {
+  for (i = 0; i < products.length; i++) {
+    console.log("POST=" + POST[`quantity${i}`]);
+    if (POST[`quantity${i}`] != undefined) {
+      console.log(typeof(POST[`quantity${i}`] ));
+      a_qty = Number(POST[`quantity${i}`]);
+      quantities[i] = a_qty;
+
+      if (!isNonNegInt(a_qty)) {
         has_errors = true; // if there is invalid quantity
-       }
+      }
+      else {
+        total_qty += a_qty; // if there is a valid quantity
+      }
     }
-    if (has_errors) {
-      qstring = querystring.stringify(POST); // post string 
-      response.redirect(`./product_display.html?${qstring}`);
-    }
-    else if (total_qty == 0) { //no quantities chosen
-      qstring = querystring.stringify(POST); // post string 
-      response.redirect(`./product_display.html?${qstring}`);
-    }
-    else { // redirecting to invoice when quantities are valid
-      receipt += eval('`' + contents + '`'); // render template string
-    };
+  }
+
+  console.log("quantity=" + total_qty);
+  if (has_errors) {
+    qstring = querystring.stringify(POST); // post string 
+    response.redirect(`/product_display.html?${qstring}`); // send back to product display page 
+  }
+  else if (total_qty == 0) { //no quantities chosen
+    qstring = querystring.stringify(POST); // post string 
+    response.redirect(`/product_display.html?${qstring}`); // send back to product display page
+  }
+  else { // redirecting to invoice when quantities are valid
+    response.send( eval('`' + contents + '`') ); // render template string
+    //response.send( "Invoice goes here" ); // render template string
+
+  };
 });
 
 
@@ -113,13 +127,13 @@ app.post("./product_display.html", function (request, response) {
     }
     //redirect to display page if there is an error or redirect to invoice if values are valid
     if (has_errors) {
-      qstring = querystring.stringify(POST); // post string 
+      qstring = querystring.stringify(POST); // post string
       response.redirect(`./product_display.html?${qstring}`);
     } else if (total_qty == 0) { //alert for no quantities chosen
-      qstring = querystring.stringify(POST); // post string 
+      qstring = querystring.stringify(POST); // post string
       response.redirect(`./product_display.html?${qstring}`);
     } else { // redirecting to invoice when quantities are valid
-      qstring = querystring.stringify(POST); // post string 
+      qstring = querystring.stringify(POST); // post string
       response.redirect(`./product_invoice.html?${qstring}`);
     }
   }
