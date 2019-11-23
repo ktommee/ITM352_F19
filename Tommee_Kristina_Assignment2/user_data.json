@@ -1,13 +1,13 @@
 {
-    "dport": {
-        "name": "Dan Port",
-        "password": "portspassword",
-        "email": "dport@hawaii.edu"
+    "bob": {
+        "name": "Bob Snow",
+        "password": "bobsnow",
+        "email": "bobsnow@hawaii.edu"
     },
-    "kazman": {
-        "name": "Rick Kazman",
-        "password": "kazmanpassword",
-        "email": "kazman@hawaii.edu"
+    "kate": {
+        "name": "Kate White",
+        "password": "katewhite",
+        "email": "katewhite@hawaii.edu"
     },
     "itm352": {
         "name": "ITM 352",
