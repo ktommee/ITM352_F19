@@ -8,8 +8,8 @@ var filename = "user_data.json"; // define file name
 if (fs.existsSync(filename))  // if the file exists
 //read and output the contents
    {var raw_data = fs.readFileSync(filename, 'utf-8');
-   var user_reg_data = JSON.parse(raw_data);
-   console.log(user_reg_data);
+   var users_reg_data = JSON.parse(raw_data);
+   console.log(users_reg_data);
  
  
    fstats = fs.statSync(filename); // data structure that tells you about the file
