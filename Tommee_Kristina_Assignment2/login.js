@@ -1,3 +1,6 @@
+// Author: Kristina Tommee
+// Description: This creates a login page for clients where they will enter their username and password to access their account
+
 var fs = require('fs'); // require readFileSync
 var express = require('express'); // require express 
 var app = express(); // create an instance of express 
@@ -49,27 +52,25 @@ app.post("/login", function (request, response) {
     let POST = request.body; // grab body of request and save it in POST
     console.log(POST);
 
-    
-    if (typeof POST ['submit'] == undefined)
+
+    if (typeof POST['submit'] == undefined) {
+        // check if the submit button was pressed.
+        console.log('No form data');
+    } else {
+        // user submitted userid and password. test them for validity
+        //check if valid username exists
+        if (user_reg_data[POST.username] != undefined) // username exist in user registration data
         {
-            // check if the submit button was pressed.
-            console.log('No form data');
-        } else
-        {
-            // user submitted userid and password. test them for validity
-            //check if valid username exists
-            if(user_reg_data[POST.username] != undefined) // username exist in user registration data
+            if (POST.password == user_reg_data[POST.username].password) // the password correctly corresponds to the defined username in the registration data
             {
-                if (POST.password == user_reg_data [POST.username].password) // the password correctly corresponds to the defined username in the registration data
-                    {
-                        console.log("Got a good password!");
-                    }
-                else{
-                    console.log("Try again!");
-                }
+                console.log("Got a good password!");
             }
-            
+            else {
+                console.log("Try again!");
+            }
         }
+
+    }
 });
 
 app.listen(8080, () => console.log(`listening on port 8080`));
