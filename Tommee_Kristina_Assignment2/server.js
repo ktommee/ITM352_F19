@@ -45,8 +45,6 @@ app.post("/product_display.html", function (request, response) {
   else { // redirecting to invoice when quantities are valid
     qstring = querystring.stringify(POST); // post string
     response.redirect(`/product_invoice.html?${qstring}`);
-    // response.send( eval('`' + contents + '`') ); // render template string
-    //response.send( "Invoice goes here" ); // render template string
 
   };
 });

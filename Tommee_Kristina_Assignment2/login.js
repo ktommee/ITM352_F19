@@ -5,7 +5,7 @@ var fs = require('fs'); // require readFileSync
 var express = require('express'); // require express 
 var app = express(); // create an instance of express 
 var myParser = require('body-parser');
-
+var querystring = require('querystring');
 app.use(myParser.urlencoded({ extended: true })); // use my parser 
 
 
@@ -68,7 +68,9 @@ app.post("/login", function (request, response) {
                 console.log("Got a good password!");
             }
             else {
+                response.redirect(`/login`);
                 console.log("Try again!");
+                
             }
         }
 
@@ -103,13 +105,13 @@ app.get("/register", function (request, response) { // if have get request to re
     if (typeof users_reg_data[usernameLowerCase] == 'undefined') // username doesn't exist in user registration data
     { 
     users_reg_data[usernameLowerCase] = {};  // create empty object 
-    users_reg_data[usernameLowerCase].name = usernameLowerCase; 
+    users_reg_data[usernameLowerCase].username = usernameLowerCase; 
     users_reg_data[usernameLowerCase].password = POST.password; 
     if (POST.password != POST.repeat_password)
     {
         console.log ("Password doesn't match!");
     }
-    users_reg_data[usernameLowerCase].fullname = POST.fullname;
+    users_reg_data[usernameLowerCase].full_name = POST.fullname;
     users_reg_data[usernameLowerCase].email = POST.email;
 
 
@@ -127,25 +129,113 @@ app.get("/register", function (request, response) { // if have get request to re
 // callback function 
 
 
+// https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
+// function which is called on onSubmit; This function calls all other functions used for validation
+
+function formValidation() {
+    var usernameLowerCase = username.toLowerCase();
+    var password = POST.password;
+    var passwordConfirm = POST.repeat_password;
+    var fullName = POST.fullname;
+    var email = POST.email;
+    if (username_validation(usernameLowerCase, 4, 10)) {
+        if (password_validation(password, 6)) {
+            if (passwordConfirm_validation(passwordConfirm)) {
+                if (fullName_validation(fullName, 30)) {
+                    if (ValidateEmail(email)) {
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+/* JavaScript function for validating username; 
+checks whether username input field is provided with a string of length 4 to 10 characters. 
+If not, it displays an alert. */
+
+function username_validation(usernameLowerCase, mx, my) {
+    var usernameLowerCase_len = usernameLowerCase.value.length;
+    if (usernameLowerCase_len == 0 || usernameLowerCase_len >= my || usernameLowerCase_len < mx) {
+        alert("Username should not be empty / length be between " + mx + " to " + my);
+        usernameLowerCase_len.focus();
+        return false;
+    }
+
+    else {
+        var letters = /^[0-9a-zA-Z]+$/;
+        if (usernameLowerCase_len.match(letters)) {
+            return true;
+        }
+        else {
+            alert('Username must have alphanumeric characters only');
+            usernameLowerCase.focus();
+            return false;
+        }
+    }
+
+}
+
+
+// validates password; it should be of length 6 characters or greater). If not, it displays an alert.
+function password_validation(password, mx) {
+    var password_len = password.value.length;
+    if (password_len == 0 || password_len < mx) {
+        alert("Password should not be empty / length should be a minimum of   " +  mx);
+        password.focus();
+        return false;
+    }
+    return true;
+}
+
+// validates password confirmation; should be the same value as password. If not, it displays an alert.
+function passwordConfirm_validation(passwordConfirm) {
+    if (passwordConfirm == password) {
+        return true;
+    }
+    else {
+        alert('Password must be the same for both inputs!');
+        passwordConfirm.focus();
+        return false;
+    }
+}
+
+/* validate userfullname 
+checks whether user name input field is provided with alphabates characters.
+If not, it displays an alert */
+function fullName_validation(fullName, mx) {
+    var letters = /^[A-Za-z]+$/;
+    if (fullName.value.match(letters)) {
+        var fullName_len = fullName.value.length;
+        if (fullName_len == 0 || ufullname_len < mx) {
+            return true;
+
+        }
+
+    }
+    else {
+        alert('Username must have alphabet characters only');
+        fullName.focus();
+        return false;
+    }
+}
+
+// validate email format
+function ValidateEmail(email) {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email.value.match(mailformat)) {
+        alert('Form Succesfully Submitted');
+        window.location.reload()
+        return true;
+    }
+    else {
+        alert("You have entered an invalid email address!");
+        email.focus();
+        return false;
+    }
+}
+
+
 app.listen(8080, () => console.log(`listening on port 8080`));
 
-
-
-/*
-// Validation of Registration Inputs 
-function isValidUsername(q, return_errors = false) {
-    errors = []; // assume no errors at first
-    if(q == '') q =0; // handle blank inputs as if they are 0
-    if (Number(q) != q) errors.push('<font color="black">Username must be 4-10 characters long!</font>'); // Check if string is a number value
-    //else if (q < 0) errors.push('<font color="black">Negative value!</font>'); // Check if it is non-negative
-    //else if (parseInt(q) != q) errors.push('<font color="black">Not an integer!</font>'); // Check that it is an integer
-    return return_errors ? errors : (errors.length == 0);
-}
-
-function checkQuantityTextbox(theTextbox) {
-    errs = isValidUsername(theTextbox.value, true); // don't want a boolean; want the actual errors array
-    document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
-}
-
-onkeyup="checkQuantityTextbox(this);"><span id="username_span"}"></span>
-*/

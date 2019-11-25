@@ -1,19 +1,27 @@
 // https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
 // function which is called on onSubmit; This function calls all other functions used for validation
+
+var usernameLowerCase = username.toLowerCase();
+var passid = document.registration.passid;
+var passidconfirm = document.registration.passidconfirm;
+var ufullname = document.registration.userfullname;
+var uadd = document.registration.address;
+var uemail = document.registration.email;
+
+users_reg_data[usernameLowerCase].username = usernameLowerCase;
+users_reg_data[usernameLowerCase].password = POST.password;
+
 function formValidation() {
-    var uname = document.registration.username;
-    var passid = document.registration.passid;
-    var passidconfirm = document.registration.passidconfirm;
-    var ufullname = document.registration.userfullname;
-    var uadd = document.registration.address;
-    var uemail = document.registration.email;
-    if (username_validation(uname, 4, 10)) {
-        if (passid_validation(passid, 6)) {
-            if (passidConfirm_validation(passidConfirm)) {
-                if (allLetter(ufullname, 30)) {
-                    if (alphanumeric(uadd)) {
-                        if (ValidateEmail(uemail)) {
-                        }
+    var usernameLowerCase = username.toLowerCase();
+    var password = POST.password;
+    var passwordConfirm = POST.repeat_password;
+    var fullName = POST.fullname;
+    var email = POST.email;
+    if (username_validation(usernameLowerCase, 4, 10)) {
+        if (password_validation(password, 6)) {
+            if (passwordConfirm_validation(passwordConfirm)) {
+                if (fullName_validation(fullName, 30)) {
+                    if (ValidateEmail(email)) {
                     }
                 }
             }
@@ -26,22 +34,22 @@ function formValidation() {
 checks whether username input field is provided with a string of length 4 to 10 characters. 
 If not, it displays an alert. */
 
-function username_validation(uname, mx, my) {
-    var uname_len = uname.value.length;
-    if (uname_len == 0 || uname_len >= my || uname_len < mx) {
+function username_validation(usernameLowerCase, mx, my) {
+    var usernameLowerCase_len = usernameLowerCase.value.length;
+    if (usernameLowerCase_len == 0 || usernameLowerCase_len >= my || usernameLowerCase_len < mx) {
         alert("Username should not be empty / length be between " + mx + " to " + my);
-        uname.focus();
+        usernameLowerCase_len.focus();
         return false;
     }
 
     else {
         var letters = /^[0-9a-zA-Z]+$/;
-        if (uname.value.match(letters)) {
+        if (usernameLowerCase_len.match(letters)) {
             return true;
         }
         else {
             alert('Username must have alphanumeric characters only');
-            uadd.focus();
+            usernameLowerCase.focus();
             return false;
         }
     }
@@ -50,24 +58,24 @@ function username_validation(uname, mx, my) {
 
 
 // validates password; it should be of length 6 characters or greater). If not, it displays an alert.
-function passid_validation(passid, mx) {
-    var passid_len = passid.value.length;
-    if (passid_len == 0 || passid_len < mx) {
-        alert("Password should not be empty / length should be a minimum of   " + mx);
-        passid.focus();
+function password_validation(password, mx) {
+    var password_len = password.value.length;
+    if (password_len == 0 || password_len < mx) {
+        alert("Password should not be empty / length should be a minimum of   " +  mx);
+        password.focus();
         return false;
     }
     return true;
 }
 
 // validates password confirmation; should be the same value as password. If not, it displays an alert.
-function passidConfirm_validation(passidConfirm) {
-    if (passidConfirm == passid) {
+function passwordConfirm_validation(passwordConfirm) {
+    if (passwordConfirm == password) {
         return true;
     }
     else {
         alert('Password must be the same for both inputs!');
-        passidConfirm.focus();
+        passwordConfirm.focus();
         return false;
     }
 }
@@ -75,11 +83,11 @@ function passidConfirm_validation(passidConfirm) {
 /* validate userfullname 
 checks whether user name input field is provided with alphabates characters.
 If not, it displays an alert */
-function allLetter(ufullname, mx) {
+function fullName_validation(fullName, mx) {
     var letters = /^[A-Za-z]+$/;
-    if (ufullname.value.match(letters)) {
-        var ufullname_len = ufullname.value.length;
-        if (ufullname_len == 0 || ufullname_len < mx) {
+    if (fullName.value.match(letters)) {
+        var fullName_len = fullName.value.length;
+        if (fullName_len == 0 || ufullname_len < mx) {
             return true;
 
         }
@@ -87,22 +95,22 @@ function allLetter(ufullname, mx) {
     }
     else {
         alert('Username must have alphabet characters only');
-        ufullname.focus();
+        fullName.focus();
         return false;
     }
 }
 
 // validate email format
-function ValidateEmail(uemail) {
+function ValidateEmail(email) {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (uemail.value.match(mailformat)) {
+    if (email.value.match(mailformat)) {
         alert('Form Succesfully Submitted');
         window.location.reload()
         return true;
     }
     else {
         alert("You have entered an invalid email address!");
-        uemail.focus();
+        email.focus();
         return false;
     }
 }
