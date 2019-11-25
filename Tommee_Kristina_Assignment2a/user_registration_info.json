@@ -1,0 +1,22 @@
+{
+    "bob": {
+        "name": "Bob Snow",
+        "password": "bobsnow",
+        "email": "bobsnow@hawaii.edu"
+    },
+    "kate": {
+        "name": "Kate White",
+        "password": "katewhite",
+        "email": "katewhite@hawaii.edu"
+    },
+    "itm352": {
+        "name": "ITM 352",
+        "password": "grader",
+        "email": "itm352@hawaii.edu"
+    },
+    "bill": {
+        "name": "bill",
+        "password": "abc",
+        "email": "b@gmail.com"
+    }
+}

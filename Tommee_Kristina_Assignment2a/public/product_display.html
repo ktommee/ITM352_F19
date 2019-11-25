@@ -1,0 +1,126 @@
+ <!-- Author: Kristina Tommee-->
+<!--Description: This is the display page for my store. I decided to organize my product infomration in a table because I felt that it was the clearest way to display the information -->
+
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Simply Fruit Baskets Display</title>
+   <script src="./products_data.js"></script>
+   <link rel="stylesheet" href="products-style.css">
+  
+ 
+   <script>
+       // Source: Lab 13 info_server_Ex4.js
+       // Validates to make sure that the string is a non-negative integer
+       function isNonNegInt(q, return_errors = false) {
+       errors = []; // assume no errors at first
+       if(q == '') q =0; // handle blank inputs as if they are 0
+       if (Number(q) != q) errors.push('<font color="black">Not a number!</font>'); // Check if string is a number value
+       else if (q < 0) errors.push('<font color="black">Negative value!</font>'); // Check if it is non-negative
+       else if (parseInt(q) != q) errors.push('<font color="black">Not an integer!</font>'); // Check that it is an integer
+       return return_errors ? errors : (errors.length == 0);
+   }
+ 
+ 
+       // Source: Lab 13 order_page_Ex4.html
+       // Function used along with isNonNegInt to validate non-negative integer; checking the value that is in the textbox
+       function checkQuantityTextbox(theTextbox) {
+       errs = isNonNegInt(theTextbox.value, true); // don't want a boolean; want the actual errors array
+       document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+   }
+ 
+   // Source: Port Assignment 1 Example 
+   // Creates an alert when quantity is invalid; directs to invoice if quantity is valid
+
+   window.onload = function () {
+       
+        let params = (new URL(document.location)).searchParams; // gets query string + form data
+        // when form is submitted, check if quantities are valid then redirect to invoice
+        console.log("Got " + params);
+        console.log(params.has('purchase_submit_button'));
+        if (params.has('purchase_submit_button')) {
+            has_errors = false; // assume quantities are valid
+            total_qty = 0; // check if any quantity is selected, checking if total > 0
+            alert("Got to onload");
+            for (i = 0; i < products.length; i++) {
+                if (params.has(`quantity${i}`)) {
+                    a_qty = params.get(`quantity${i}`);
+                    // make textboxes sticky in case of invalid data
+                    quantity_form[`quantity${i}`].value = a_qty;
+                    total_qty += a_qty;
+                    if (!isNonNegInt(a_qty)) {
+                        has_errors = true; // if there is invalid quantity
+                    }
+                }
+            }
+            //give an alert if there is an error or redirect to invoice if values are valid
+            if (has_errors) {
+                alert("Please enter only valid quantities.");
+            } else if (total_qty == 0) { //alert for no quantities chosen
+                alert("Please select some quantities for the items you want to purchase.");
+            } else { // redirecting to invoice when quantities are valid
+                window.location = `./product_invoice.html${document.location.search}`;
+                window.stop;
+            }
+        }
+    }
+
+   </script>
+</head>
+ 
+<body>
+   <!-- Creating a form using product data from product_data.js with textbox for user input and submit button to take user to invoice-->
+   <form name="quantity_form" action="./product_invoice.html" method="GET">
+       <header>
+           <h1>...Simply Fruit Baskets...</h1>
+ 
+           <h2>Purchase a basket for a $7.99 and choose your fruits!</h2>
+       </header>
+       <div>
+           <main>
+               <table border="2">
+                       <!-- Creating table headers -->
+                       <tr>
+                           <th style="text-align: center;" width="30%">Product</th>
+                           <th style="text-align: center;" width="30%">Price</th>
+                           <th style="text-align: center;" width="10%">Variety</th>
+                           <th style="text-align: center;" width="40%">Quantity</th>
+                       </tr>
+ 
+                       <script>
+                           // Source: Kazman Assignment 1 example
+                           // Creating the table rows and table cells by pulling data from product_data.js
+                           for (i = 0; i < products.length; i++) {
+                               Outstr = '';
+                               Outstr += `<tr><td style="text-align: center;" width = "50%"><img src = "${products[i].image}">${products[i].product}</td>`
+                                   + `<td style="text-align: center;" width = "11%">$${products[i].price.toFixed(2)}</td>`
+                                   + `<td style="text-align: center;" width = "30%">${products[i].variety }</td>`
+                                   + `<td> <input type="text" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"><span id="quantity${i}_span"}"></span></td></tr>`;
+                              
+                               // Write out everything within the oustring
+                               document.write(Outstr);
+                            
+ 
+                           }
+ 
+                       </script>
+ 
+               </table>
+           </main>
+       </div>
+       <footer>
+           <!-- Source: Lab 13 order_page_Ex4.html -->
+           <!-- Creating purchase button which will then take user to invoice -->
+           <input type="submit" value='Purchase!' name="purchase_submit_button">
+       </footer>
+   </form>
+</body>
+ 
+<!-- Image of a fruit basket -->
+<img src="https://res.cloudinary.com/bloomnation/c_pad,d_vendor:global:catalog:product:image.png,f_auto,fl_preserve_transparency,q_auto/v1531778417/vendor/6646/catalog/product/d/b/dbfa4ec802061a7bbfb7c7132f9579ba_2_11.jpg" alt="Fruit Baskets" style="text-align: center;" height="30%" width="30%"></a>
+ 
+</html>

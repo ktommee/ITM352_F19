@@ -45,7 +45,6 @@
         if (params.has('purchase_submit_button')) {
             has_errors = false; // assume quantities are valid
             total_qty = 0; // check if any quantity is selected, checking if total > 0
-            alert("Got to onload");
             for (i = 0; i < products.length; i++) {
                 if (params.has(`quantity${i}`)) {
                     a_qty = params.get(`quantity${i}`);
@@ -74,7 +73,7 @@
  
 <body>
    <!-- Creating a form using product data from product_data.js with textbox for user input and submit button to take user to invoice-->
-   <form name="quantity_form" action="./product_invoice.html" method="GET">
+   <form name="quantity_form" action=" " method="POST">
        <header>
            <h1>...Simply Fruit Baskets...</h1>
  

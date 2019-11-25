@@ -13,8 +13,6 @@ app.use(myParser.urlencoded({ extended: true }));
 app.post("/product_display.html", function (request, response) {
   // Code to handle POST from products display
   let POST = request.body;
-  var contents = fs.readFileSync('./views/product_invoice.html', 'utf8');
-  receipt = '';
   has_errors = false;
   total_qty = 0;
   quantities = [];
@@ -45,7 +43,9 @@ app.post("/product_display.html", function (request, response) {
     response.redirect(`/product_display.html?${qstring}`); // send back to product display page
   }
   else { // redirecting to invoice when quantities are valid
-    response.send( eval('`' + contents + '`') ); // render template string
+    qstring = querystring.stringify(POST); // post string
+    response.redirect(`/product_invoice.html?${qstring}`);
+    // response.send( eval('`' + contents + '`') ); // render template string
     //response.send( "Invoice goes here" ); // render template string
 
   };
