@@ -11,6 +11,7 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Simply Fruit Basket Invoice</title>
       <script src="./products_data.js"></script>
+      <script src="../login.js"></script>
       <link rel="stylesheet" href="products-style.css">
       <script>
           // Source: Port Assignment 1 example 
@@ -121,6 +122,10 @@
           <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
           <td width="54%"><strong>$
               <script>document.write(total.toFixed(2));</script></strong></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="5" width="100%" ><script>document.write("Thank you, " + usernameLowerCase + ". See you again soon!");</script></td>
+             </td>
         </tr>
       </tbody>
     </table>
