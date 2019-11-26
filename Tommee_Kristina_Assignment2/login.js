@@ -70,7 +70,6 @@ app.post("/login", function (request, response) {
             else {
                 response.redirect(`/login`);
                 console.log("Try again!");
-                
             }
         }
 
@@ -122,7 +121,8 @@ app.get("/register", function (request, response) { // if have get request to re
 
     }
     else {
-        response.send("User " + usernameLowerCase + " already taken; try again.");
+      response.send("User " + usernameLowerCase + " already taken; try again.");
+        
     }
  });
 
@@ -132,7 +132,7 @@ app.get("/register", function (request, response) { // if have get request to re
 // https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
 // function which is called on onSubmit; This function calls all other functions used for validation
 
-function formValidation() {
+function formValidation(POST) {
     var usernameLowerCase = username.toLowerCase();
     var password = POST.password;
     var passwordConfirm = POST.repeat_password;
