@@ -29,7 +29,7 @@ else {
 }
 
 /* get login request from user
-when use asks for login form (get request)
+when user asks for login form (get request)
 respond by creating a string that has a body wihtin it has a form with a textbox called user name; password box; and submit button 
 */
 
