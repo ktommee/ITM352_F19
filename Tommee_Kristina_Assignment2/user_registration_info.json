@@ -1,8 +1,8 @@
 {
-    "bob": {
-        "name": "Bob Snow",
-        "password": "bobsnow",
-        "email": "bobsnow@hawaii.edu"
+    "ktommee": {
+        "name": "kristina",
+        "password": "kristina",
+        "email": "ktommee@hawaii.edu"
     },
     "kate": {
         "name": "Kate White",
@@ -13,23 +13,5 @@
         "name": "ITM 352",
         "password": "grader",
         "email": "itm352@hawaii.edu"
-    },
-    "bill": {
-        "username": "bill",
-        "password": "bill",
-        "fullname": "bill",
-        "email": "bill@gmail.com"
-    },
-    "jay": {
-        "username": "jay",
-        "password": "abc",
-        "fullname": "jay right",
-        "email": "jay@gmail.com"
-    },
-    "hi": {
-        "username": "hi",
-        "password": "hi",
-        "full_name": "bill",
-        "email": "hi@gmail.com"
     }
 }
