@@ -1,25 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="products-style.css">
     <title>Register Page</title>
 
     <script>
 
+        // Source: Lab 13 order_page_Ex4.html
+        // Function used along with isNonNegInt to validate non-negative integer; checking the value that is in the textbox
+        function check(theTextbox) {
+            errs = usernameValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
+            document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+        }
+
+        //document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+
+        // Source: Lab 13 info_server_Ex4.js
+        // validates to make sure that full name meets requirements 
+        function usernameValidation(usernameLowerCase, return_errors = false) {
+            var username = POST.username;
+            var usernameLowerCase = username.toLowerCase();
+            var letters = /^[0-9a-zA-Z]+$/;
+            errors = []; // assume no errors at first
+            // check if length is okay 
+            if (usernameLowerCase.length > 10 || usernameLowerCase.length < 4) {
+                errors.push('<font color="black">Username must be between 4 and 10 characters long!</font>');
+            }
+            // check if there are only letters and numbers
+            if (!usernameLowerCase.match(letters)) {
+                // if contain characters that are not letters = error 
+                errors.push('<font color="black">Username can only contain alphanumeric characters only!</font>');
+            }
+
+            return return_errors ? errors : (errors.length == 0);
+        }
+
+        // validates password; it should be of length 6 characters or greater). If not, it displays an alert.
+        function passwordValidation(password, return_errors = false) {
+            var password = POST.password;
+            if (password.length < 6) {
+                errors.push('<font color="black">Password must be at least 6 characters long!</font>')
+            }
+
+            return return_errors ? errors : (errors.length == 0);
+        }
+
+
+        // validates password confirmation; should be the same value as password. If not, it displays an alert.
+        function passwordConfirmValidation(passwordConfirm, return_errors = false) {
+            var passwordConfirm = POST.repeat_password;
+            if (passwordConfirm != password) {
+                errors.push('<font color="black">Password must be the same for both password inputs!</font>')
+            }
+            return return_errors ? errors : (errors.length == 0);
+        }
+
+        // validate fullname checks whether user name input field is provided with alphabates characters. If not, it displays an alert 
+        function fullNameValidation(fullName, return_errors = false) {
+            var letters = /^[A-Za-z]+$/;
+            var fullName = POST.fullname;
+            if (!fullName.match(letters)) {
+                errors.push('<font color="black">Username can only contain letters</font>');
+            }
+
+            return return_errors ? errors : (errors.length == 0);
+        }
+
+        // validate email format
+        function emailValidation(email, return_errors = false) {
+            var email = POST.email;
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (!email.match(mailformat)) {
+                errors.push('<font color="black">You have entered an invalid email address!</font>');
+            }
+
+            return return_errors ? errors : (errors.length == 0);
+        }
+
+
     </script>
 
 </head>
+
 <body>
-    <form name = "register" action="" method="POST">
-        <input type="text" name="fullname" size="40" placeholder="enter full name"><br />
-        <input type="text" name="username" size="40" placeholder="enter username"><br />
-        <input type="password" name="password" size="40" placeholder="enter password"><br />
-        <input type="password" name="repeat_password" size="40" placeholder="enter password again"><br />
-        <input type="email" name="email" size="40" placeholder="enter email"><br />
-        <input type="submit" value="Submit" id="submit">
+    <h1>...Register Page...</h1>
+    <!-- Takes you to the login page -->
+    <b><a href="login.html">Already have an account? Click here to login!</a></b>
+    <br>
+    <br>
+    <br>
+
+
+    <form name="register" action="" method="POST">
+        <input type="text" name="fullname" size="40" placeholder="enter full name"><span id="fullname_span"></span><br />
+        <input type="text" name="username" size="40" placeholder="enter username" onkeyup="check(this);"><span id="username_span"></span><br />
+        <input type="password" name="password" size="40" placeholder="enter password"><span id="password_span"></span><br />
+        <input type="password" name="repeat_password" size="40" placeholder="enter password again"><span id="repeatPassword_span"></span><br />
+        <input type="email" name="email" size="40" placeholder="enter email"><span id="email_span"></span><br />
+        <input type="submit" value="Submit" name="register_submit_button">
     </form>
+
+    <br>
+    <br>
+    <br>
+
 </body>
+
 </html>
 
+<script>
+        // Source: Port Assignment 1 Example 
+        // Creates an alert when quantity is invalid; directs to invoice if quantity is valid
+
+    /* window.onload = function () {
+
+let params = (new URL(document.location)).searchParams; // gets query string + form data
+// when form is submitted, check if quantities are valid then redirect to invoice
+if (params.has('register_submit_button')) {
+ has_errors = false; // assume inputs are valid
+ for (i = 0; i < products.length; i++) {
+     if (params.has(`quantity${i}`)) {
+         a_qty = params.get(`quantity${i}`);
+         // make textboxes sticky in case of invalid data
+         quantity_form[`quantity${i}`].value = a_qty;
+         total_qty += a_qty;
+         if (!isNonNegInt(a_qty)) {
+             has_errors = true; // if there is invalid quantity
+         }
+     }
+ }
+ //give an alert if there is an error or redirect to invoice if values are valid
+ if (has_errors) {
+     alert("Please enter only valid quantities.");
+ } else if (total_qty == 0) { //alert for no quantities chosen
+     alert("Please select some quantities for the items you want to purchase.");
+ } else { // redirecting to invoice when quantities are valid
+     window.location = `./product_invoice.html${document.location.search}`;
+     window.stop;
+ }
+}
+}
+*/
+</script>
