@@ -98,7 +98,7 @@
                                Outstr += `<tr><td style="text-align: center;" width = "50%"><img src = "${products[i].image}">${products[i].product}</td>`
                                    + `<td style="text-align: center;" width = "11%">$${products[i].price.toFixed(2)}</td>`
                                    + `<td style="text-align: center;" width = "30%">${products[i].variety }</td>`
-                                   + `<td> <input type="text" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"><span id="quantity${i}_span"}"></span></td></tr>`;
+                                   + `<td> <input type="text" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"><span id="quantity${i}_span"></span></td></tr>`;
                               
                                // Write out everything within the oustring
                                document.write(Outstr);
