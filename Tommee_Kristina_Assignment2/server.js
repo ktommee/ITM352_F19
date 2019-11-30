@@ -61,18 +61,49 @@ app.post("/register.html", function (request, response) {
   // process a simple register form
   console.log("Got the registration request"); // server go the post request from the register page 
   let POST = request.body; // take body of request and save it in local variable, POST
-
-
   var username = POST.username; // store what was typed in the username textbox in the variable username
   var usernameLowerCase = username.toLowerCase(); // convert what was typed in the username textbox to all lower case and store in a variable 
+  var password = POST.password;
+  var email = POST.email;
+  var fullname = POST.fullname;
+
+  is_valid = true;
+  // check if username is valid
+  errs_array = usernameValidation(usernameLowerCase, true);
+  if (errs_array.length != 0)
+    is_valid = false;
+
+  // check if password is valid 
+  errs_array = passwordValidation(password, true);
+  if (errs_array.length != 0)
+    is_valid = false;
+
+  // check if email is valid 
+  errs_array = emailValidation(email, true);
+  if (errs_array.length != 0)
+    is_valid = false;
+
+  // check if fullname is valid
+  errs_array = fullnameValidation(fullname, true);
+  if (errs_array.length != 0)
+    is_valid = false;
+
+  // Now check if there were any errors
+  if (!is_valid) {
+    //redirect back to regisrtaion.html
+    response.redirect("register.html");
+    console.log("Oh no");
+    return;
+  }
+
   if (typeof users_reg_data[usernameLowerCase] == 'undefined') // username doesn't exist in user registration data
   {
     users_reg_data[usernameLowerCase] = {};  // create empty object 
     users_reg_data[usernameLowerCase].username = usernameLowerCase;
     users_reg_data[usernameLowerCase].password = POST.password;
-    if (POST.password != POST.repeat_password) {
-      console.log("Password doesn't match!");
-    }
+    //if (POST.password != POST.repeat_password) {
+    //console.log("Password doesn't match!");
+    //}
     users_reg_data[usernameLowerCase].full_name = POST.fullname;
     users_reg_data[usernameLowerCase].email = POST.email;
 
@@ -84,13 +115,58 @@ app.post("/register.html", function (request, response) {
     response.redirect("product_invoice.html?" + quantityqstring); // registration information is valid; send to invoice with data from display page stored in query string
 
   }
-  else {
-    //response.send("User " + usernameLowerCase + " already taken; try again.");
-    response.redirect("register.html"); // send back to register page if the username is already taken  
+  //else {
+  //response.send("User " + usernameLowerCase + " already taken; try again.");
+  //response.redirect("register.html"); // send back to register page if the username is already taken  
 
-  }
+  //}
 });
 
+// Source: Lab 13 info_server_Ex4.js
+// validates to make sure that username meets requirements 
+function usernameValidation(usernameLowerCase, return_errors = false) {
+  var letters = /^[0-9a-zA-Z]+$/;
+  errors = []; // assume no errors at first
+  // check if length is okay 
+  if (usernameLowerCase.length > 10 || usernameLowerCase.length < 4) {
+    errors.push('<font color="black">Username must be between 4 and 10 characters long!</font>');
+  }
+  // check if there are only letters and numbers
+  if (!usernameLowerCase.match(letters)) {
+    // if contain characters that are not letters = error 
+    errors.push('<font color="black">Username can only contain alphanumeric characters only!</font>');
+  }
+
+  return return_errors ? errors : (errors.length == 0);
+}
+
+// validates password; it should be of length 6 characters or greater). If not, it displays an alert.
+function passwordValidation(password, return_errors = false) {
+  if (password.length < 6) {
+    errors.push('<font color="black">Password must be at least 6 characters long!</font>')
+  }
+
+  return return_errors ? errors : (errors.length == 0);
+}
+
+// validate email format
+function emailValidation(email, return_errors = false) {
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!email.match(mailformat)) {
+    errors.push('<font color="black">You have entered an invalid email address!</font>');
+  }
+
+  return return_errors ? errors : (errors.length == 0);
+}
+// validate fullname checks whether user name input field is provided with alphabates characters. If not, it displays an alert 
+function fullnameValidation(fullName, return_errors = false) {
+  var letters = /^[A-Za-z]+$/;
+  if (!fullName.match(letters)) {
+    errors.push('<font color="black">Username can only contain letters</font>');
+  }
+
+  return return_errors ? errors : (errors.length == 0);
+}
 
 
 // Source: Port Assignment 1 Example + Lab 13 info_server_Ex4.js
