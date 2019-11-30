@@ -1,0 +1,31 @@
+<script src= "product_data.js"></script>
+
+<h1>Invoice</h1>
+
+<table border=1>
+    <script>
+        
+        let myParams = (new URL (document.location)).searchParams;
+        // initialize as empty 
+        outStr = "";
+
+        for (i=0; i<products.length; i++) {
+            // this param holds the name of the field that I'm looking for 
+            thisParam = "quantity" + i; 
+            // get a particual parameter, and return its value; store in variable qty
+            let qty = myParams.get(thisParam);
+            // if can't find parameter, will return null
+            if (qty !=null) // this manes that the user bought something!
+            {
+                outStr += `<tr><td>${products[i].model}</td>`;
+                outStr += `<td>${qty}</td>`;
+                // calculate extended price
+                extended = qty * products[i].price; 
+                outStr += `<td>${extended}</td><tr>`;
+            }
+        }
+
+        document.write(outStr);
+    </script>
+
+</table>
