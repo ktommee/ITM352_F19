@@ -10,28 +10,46 @@
 
     <script>
 
+        /*   window.onload = function () {
+               let params = (new URL(document.location)).searchParams;
+               the_user = params.get("username");
+               console.log("Here is " + the_user);
+               if (the_user != null) {
+                   username_errs = usernameValidation(the_user.toLowerCase(), true);
+               }
+               // if the username errors array = 0, meaning that there is nothing in the array, then good! if not, send the array back through the span (document.getElementbyId)
+               if (username_errs.length != 0) {
+                   document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+               }
+           }
+   
+           */
+
         // Source: Lab 13 order_page_Ex4.html
         // Function used along with isNonNegInt to validate non-negative integer; checking the value that is in the textbox
-        function check(theTextbox) {
+        function checkUsername(theTextbox) {
             errs = usernameValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
             document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
         }
+        
 
-        //document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+        function checkPassword(theTextbox) {
+            errs = passwordValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
+            document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+        }
+
 
         // Source: Lab 13 info_server_Ex4.js
         // validates to make sure that full name meets requirements 
-        function usernameValidation(usernameLowerCase, return_errors = false) {
-            var username = POST.username;
-            var usernameLowerCase = username.toLowerCase();
+        function usernameValidation(the_user, return_errors = false) {
             var letters = /^[0-9a-zA-Z]+$/;
             errors = []; // assume no errors at first
             // check if length is okay 
-            if (usernameLowerCase.length > 10 || usernameLowerCase.length < 4) {
+            if (the_user.length > 10 || the_user.length < 4) {
                 errors.push('<font color="black">Username must be between 4 and 10 characters long!</font>');
             }
             // check if there are only letters and numbers
-            if (!usernameLowerCase.match(letters)) {
+            if (!the_user.match(letters)) {
                 // if contain characters that are not letters = error 
                 errors.push('<font color="black">Username can only contain alphanumeric characters only!</font>');
             }
@@ -40,9 +58,8 @@
         }
 
         // validates password; it should be of length 6 characters or greater). If not, it displays an alert.
-        function passwordValidation(password, return_errors = false) {
-            var password = POST.password;
-            if (password.length < 6) {
+        function passwordValidation(the_password, return_errors = false) {
+            if (the_password.length < 6) {
                 errors.push('<font color="black">Password must be at least 6 characters long!</font>')
             }
 
@@ -60,10 +77,9 @@
         }
 
         // validate fullname checks whether user name input field is provided with alphabates characters. If not, it displays an alert 
-        function fullNameValidation(fullName, return_errors = false) {
+        function fullnameValidation(the_Fullname, return_errors = false) {
             var letters = /^[A-Za-z]+$/;
-            var fullName = POST.fullname;
-            if (!fullName.match(letters)) {
+            if (!the_Fullname.match(letters)) {
                 errors.push('<font color="black">Username can only contain letters</font>');
             }
 
@@ -71,10 +87,9 @@
         }
 
         // validate email format
-        function emailValidation(email, return_errors = false) {
-            var email = POST.email;
+        function emailValidation(the_email, return_errors = false) {
             var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if (!email.match(mailformat)) {
+            if (!the_email.match(mailformat)) {
                 errors.push('<font color="black">You have entered an invalid email address!</font>');
             }
 
@@ -96,13 +111,37 @@
 
 
     <form name="register" action="" method="POST">
-        <input type="text" name="fullname" size="40" placeholder="enter full name"><span id="fullname_span"></span><br />
-        <input type="text" name="username" size="40" placeholder="enter username" onkeyup="check(this);"><span id="username_span"></span><br />
-        <input type="password" name="password" size="40" placeholder="enter password"><span id="password_span"></span><br />
-        <input type="password" name="repeat_password" size="40" placeholder="enter password again"><span id="repeatPassword_span"></span><br />
-        <input type="email" name="email" size="40" placeholder="enter email"><span id="email_span"></span><br />
+        <input type="text" name="fullname" size="40" placeholder="enter full name" onkeyup="checkFullname(this);"><span
+            id="fullname_span"></span><br />
+        <input type="text" name="username" size="40" placeholder="enter username" onkeyup="checkUsername(this);"><span
+            id="username_span"></span><br />
+        <input type="password" name="password" size="40" placeholder="enter password" onkeyup="checkPassword(this);"><span
+            id="password_span"></span><br />
+        <input type="password" name="repeat_password" size="40" placeholder="enter password again" onkeyup="checkPasswordRepeat(this);"><span
+            id="repeatPassword_span"></span><br />
+        <input type="email" name="email" size="40" placeholder="enter email"><span id="email_span" onkeyup="checkEmail(this);"></span><br />
         <input type="submit" value="Submit" name="register_submit_button">
     </form>
+
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        the_user = params.get("username");
+        the_password = params.get("password");
+        the_fullname = params.get("fullname");
+        the_email = paras.get("email");
+        if (the_user != null) {
+            login.username.value = the_user;
+        }
+        if (the_password != null) {
+            login.password.value = the_password;
+        }
+        if (the_fullname != null) {
+            login.fullname.value = the_fullname;
+        }
+        if (the_email != null) {
+            login.email.value = the_email;
+        }
+    </script>
 
     <br>
     <br>
@@ -144,5 +183,17 @@ if (params.has('register_submit_button')) {
  }
 }
 }
+
+
+
+ // Source: Lab 13 order_page_Ex4.html
+        // Function used along with isNonNegInt to validate non-negative integer; checking the value that is in the textbox
+        //function check(theTextbox) {
+            //errs = usernameValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
+            //document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+        }
+
+        //document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
+
 */
 </script>
