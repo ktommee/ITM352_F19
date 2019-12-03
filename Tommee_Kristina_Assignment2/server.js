@@ -11,6 +11,7 @@ var fs = require('fs'); // require readFileSync;
 var filename = "user_registration_info.json"; // define file name
 var quantityqstring;
 var loginqstring;
+var registerqstring;
 
 // Source: Lab 14 exercise 4 
 var raw_data = fs.readFileSync(filename, 'utf-8');
@@ -24,7 +25,8 @@ app.post("/login.html", function (request, response) {
   // Process login form POST and redirect to logged in page if ok, back to login page if not
   let POST = request.body; // grab body of request and save it in POST
   console.log(POST, quantityqstring);
-
+  qstring = querystring.stringify(POST);
+  loginqstring = qstring;
 
   if (typeof POST['submit'] == undefined) {
     // check if the submit button was pressed.
@@ -39,14 +41,13 @@ app.post("/login.html", function (request, response) {
     {
       if (POST.password == users_reg_data[usernameLowerCase].password) // the password correctly corresponds to the defined username in the registration data
       {
-        response.redirect("product_invoice.html?" + quantityqstring); // username and password match the user reg data; send to invoice with data from display page stored in query string
+        response.redirect("product_invoice.html?" + quantityqstring + loginqstring); // username and password match the user reg data; send to invoice with data from display page stored in query string
         return;
       }
       else {
-        qstring = querystring.stringify(POST);
-        loginqstring = qstring;
         response.redirect("login.html?" + loginqstring);
         console.log("Bad password");
+        
         return;
       }
     } else {
@@ -64,6 +65,7 @@ app.post("/register.html", function (request, response) {
   var username = POST.username; // store what was typed in the username textbox in the variable username
   var usernameLowerCase = username.toLowerCase(); // convert what was typed in the username textbox to all lower case and store in a variable 
   var password = POST.password;
+  var repeatPassword = POST.repeatPassword;
   var email = POST.email;
   var fullname = POST.fullname;
 
@@ -91,9 +93,19 @@ app.post("/register.html", function (request, response) {
   // Now check if there were any errors
   if (!is_valid) {
     //redirect back to regisrtaion.html
-    response.redirect("register.html");
+    qstring = querystring.stringify(POST);
+    registerqstring = qstring;
+    response.redirect("register.html?" + registerqstring);
     console.log("Oh no");
     return;
+  }
+
+  if (repeatPassword != password) {
+    qstring = querystring.stringify(POST);
+    registerqstring = qstring;
+    response.redirect("register.html?" + registerqstring);
+    console.log("Password repeat wrong!");
+    return; 
   }
 
   if (typeof users_reg_data[usernameLowerCase] == 'undefined') // username doesn't exist in user registration data
@@ -221,4 +233,8 @@ function isNonNegInt(q, returnErrors = false) {
 
 app.use(express.static('./public'));
 app.listen(8080, () => console.log(`listening on port 8080`));
+
+/*
+/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+*/
 
