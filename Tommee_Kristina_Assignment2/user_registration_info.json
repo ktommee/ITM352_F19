@@ -1,17 +1,1 @@
-{
-    "ktommee": {
-        "name": "kristina",
-        "password": "kristina",
-        "email": "ktommee@hawaii.edu"
-    },
-    "kate": {
-        "name": "Kate White",
-        "password": "katewhite",
-        "email": "katewhite@hawaii.edu"
-    },
-    "itm352": {
-        "name": "ITM 352",
-        "password": "grader",
-        "email": "itm352@hawaii.edu"
-    }
-}
+{"ktommee":{"name":"kristina","password":"kristina","email":"ktommee@hawaii.edu"},"kate":{"name":"Kate White","password":"katewhite","email":"katewhite@hawaii.edu"},"itm352":{"name":"ITM 352","password":"grader","email":"itm352@hawaii.edu"},"abcd":{"username":"abcd","password":"abcdef","full_name":"a","email":"a@gmail.com"},"katt":{"username":"katt","password":"abcdef","full_name":"a","email":"k@gmail.com"},"bbbb":{"username":"bbbb","password":"bbbbbb","full_name":"a","email":"b@gmail.com"},"cccc":{"username":"cccc","password":"cccccc","full_name":"c","email":"c@gmail.com"}}
