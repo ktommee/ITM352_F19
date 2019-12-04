@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Refresh" content="5;url=/login.html">
+    <title>Document</title>
+    <link rel="stylesheet" href="products-style.css">
+    <script>
+            let params = (new URL(document.location)).searchParams;
+            the_user = params.get("username");
+            if (the_user != null) {
+                login.username.value = the_user;
+            }
+            var loginqstring = "&username=" + the_user;
+    
+    
+        </script>
+</head>
+<body>
+        <p>Sorry, incorrect password. Please try again! </p>
+        <p><a href="/login.html?" + loginqstring>Login Page</a></p>
+</body>
+</html>

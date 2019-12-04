@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Refresh" content="5;url=/register.html">
+    <title>Document</title>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        var quantityqstring = "&quantity=" + quantity[i];
+        var quantity = [];
+        // form was submitted so process the invoice
+        if (params.has('purchase_submit_button')) {
+            for (i = 0; i < products.length; i++) {
+                if (params.has(`quantity${i}`)) {
+                    a_qty = params.get(`quantity${i}`);
+                    quantity[i] = a_qty;
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>Sorry! This username is already taken! </p>
+    <p>You will be redirected back to the register page.</p>
+    <p>If you see this message for more than 5 seconds, please click on the link below!</p>
+    <p><a href="/product_invoice.html?" + quantityqstring>Register Page</a></p>
+</body>
+
+</html>

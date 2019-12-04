@@ -37,14 +37,16 @@ app.post("/login.html", function (request, response) {
     //check if valid username exists
     var username = POST.username; // store what was typed in the username textbox in the variable username
     var usernameLowerCase = username.toLowerCase(); // convert what was typed in the username textbox to all lower case and store in a variable 
+    var usernameqstring = "&user=" + username;
     if (users_reg_data[usernameLowerCase] != undefined) // username exist in user registration data
     {
       if (POST.password == users_reg_data[usernameLowerCase].password) // the password correctly corresponds to the defined username in the registration data
       {
-        response.redirect("product_invoice.html?" + quantityqstring + loginqstring); // username and password match the user reg data; send to invoice with data from display page stored in query string
+        response.redirect("product_invoice.html?" + quantityqstring + usernameqstring); // username and password match the user reg data; send to invoice with data from display page stored in query string
         return;
       }
       else {
+        //response.redirect("loginredirect2.html")
         response.redirect("login.html?" + loginqstring);
         console.log("Bad password");
         
@@ -53,7 +55,7 @@ app.post("/login.html", function (request, response) {
     } else {
       console.log("username doesn't exist");
     }
-    response.redirect("login.html"); // send to the register page if the username doesn't exist 
+    response.redirect("loginredirect1.html"); // send to the register page if the username doesn't exist 
   }
 });
 
@@ -68,6 +70,7 @@ app.post("/register.html", function (request, response) {
   var repeatPassword = POST.repeatPassword;
   var email = POST.email;
   var fullname = POST.fullname;
+  var usernameqstring = "&user=" + username;
 
   is_valid = true;
   // check if username is valid
@@ -124,8 +127,11 @@ app.post("/register.html", function (request, response) {
     fs.writeFileSync(filename, output_data, "utf-8");
 
     //response.send ("User " + usernameLowerCase + " registered"); // send response back to user 
-    response.redirect("product_invoice.html?" + quantityqstring); // registration information is valid; send to invoice with data from display page stored in query string
-
+    response.redirect("product_invoice.html?" + quantityqstring + usernameqstring); // registration information is valid; send to invoice with data from display page stored in query string
+    return;
+  }
+  else{
+    response.redirect("redirect.html");
   }
   //else {
   //response.send("User " + usernameLowerCase + " already taken; try again.");
