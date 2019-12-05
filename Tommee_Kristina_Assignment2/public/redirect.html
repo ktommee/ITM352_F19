@@ -1,26 +1,29 @@
+<!-- Author: Kristina Tommee-->
+<!--Description: This is the redirect page that the user will be directed to 
+if they are trying to register with a username that is already taken -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Refresh" content="10;url=/register.html">
+    <!-- Source of delay redirect: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_redirect-->
+    <meta http-equiv="Refresh" content="10;url=/register.html"> <!-- Will refresh to the page and take user back to register page in 10 seconds-->
     <link rel="stylesheet" href="products-style.css">
-    <title>Document</title>
+    <title>Username Taken Redirect</title>
 
-    <script>
-        
-    </script>
 </head>
 
+<!-- Source:https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_redirect -->
 <body>
     <br>
     <br>
     <h2>Sorry! This username is already taken! </h2>
     <p>You will be redirected back to the register page.</p>
     <p>If you see this message for more than 10 seconds, please click on the link below!</p>
-    <p><a href="/register.html?">Register Page</a></p>
-    <br>
+    <p><a href="/register.html?">Register Page</a></p>  <!-- Has embedded link that will take user back to the register page -->
+    <br
     <br>
 </body>
 
