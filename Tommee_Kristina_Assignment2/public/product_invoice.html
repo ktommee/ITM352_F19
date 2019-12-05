@@ -19,16 +19,12 @@
     let params = (new URL(document.location)).searchParams;
     var quantity = [];
     // form was submitted so process the invoice
-    if (params.has('purchase_submit_button')) {
       for (i = 0; i < products.length; i++) {
         if (params.has(`quantity${i}`)) {
           a_qty = params.get(`quantity${i}`);
           quantity[i] = a_qty;
         }
-      }
-    } else {
-      document.write('no form submitted');
-    }
+    } 
     console.log(quantity);
     // fill out the invoice
 
