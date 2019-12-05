@@ -1,29 +1,43 @@
+<!-- Author: Kristina Tommee-->
+<!--Description: This is the redirect page that the user will be directed to 
+if the password does not match the username in the login page. This page is a delayed redirect page that will then direct user to the login page -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Source of delay redirect: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_redirect-->
     <meta http-equiv="Refresh" content="5;url=/login.html">
-    <title>Document</title>
+    <title>Incorrect Login Password</title>
     <link rel="stylesheet" href="products-style.css">
+
     <script>
+        // Source: Port Assignment 1 example 
         let params = (new URL(document.location)).searchParams;
-        var loginqstring = "";
-        the_user = params.get("username");
+        var loginqstring = "";  // initialize variable 
+        the_user = params.get("username"); // get value of user 
         if (the_user == null) {
+            // there is no value for the_user
             the_user = "Unknown User";
 
             console.log(the_user);
         }
         loginqstring += `&username=` + the_user;
+        // if the_user has a value, create query string 
 
+        // Source: Kazman Assignment 1 example
+        // Source of delayed redirect: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_redirect
         outStr = `<meta http-equiv="Refresh" content="5;url=/login.html?${loginqstring}">`;
         document.write(outStr);
+        // send the user to the login page with username info stored in query string; will automatically refresh and go to login page in 5 seconds
 
     </script>
 
     <script>
+        // Source: Kazman Assignment 1 example
+        // Source of delayed redirect: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_redirect
         outStr = `
 </head>
 <body>
@@ -36,6 +50,8 @@
     <br>
 </body>`;
         document.write(outStr);
+
+         // link that will take the user to login page with username info stored in query string
 
     </script>
 
