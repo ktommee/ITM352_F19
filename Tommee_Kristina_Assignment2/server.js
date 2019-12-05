@@ -127,7 +127,8 @@ app.post("/register.html", function (request, response) {
     fs.writeFileSync(filename, output_data, "utf-8");
 
     //response.send ("User " + usernameLowerCase + " registered"); // send response back to user 
-    response.redirect("product_invoice.html?" + quantityqstring + usernameqstring); // registration information is valid; send to invoice with data from display page stored in query string
+    response.redirect("/registrationredirect.html?" + quantityqstring + usernameqstring);
+    //response.redirect("product_invoice.html?" + quantityqstring + usernameqstring); // registration information is valid; send to invoice with data from display page stored in query string
     return;
   }
   else{
