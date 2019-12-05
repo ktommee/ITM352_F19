@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,35 @@
     <title>Document</title>
     <link rel="stylesheet" href="products-style.css">
     <script>
-            let params = (new URL(document.location)).searchParams;
-            the_user = params.get("username");
-            if (the_user != null) {
-                login.username.value = the_user;
-            }
-            var loginqstring = "&username=" + the_user;
-    
-    
-        </script>
+        let params = (new URL(document.location)).searchParams;
+        var loginqstring = "";
+        the_user = params.get("username");
+        if (the_user == null) {
+            the_user = "Unknown User";
+
+            console.log(the_user);
+        }
+        loginqstring += `&username=` + the_user;
+
+        outStr = `<meta http-equiv="Refresh" content="5;url=/login.html?${loginqstring}">`;
+        document.write(outStr);
+
+    </script>
+
+    <script>
+        outStr = `
 </head>
 <body>
-        <p>Sorry, incorrect password. Please try again! </p>
-        <p><a href="/login.html?" + loginqstring>Login Page</a></p>
-</body>
+    <br>
+    <br>
+    <br>    
+    <h2>Sorry, incorrect password. Please try again! </h2>
+        <h3><a href="/login.html?${loginqstring}">Login Page</a></h3>
+    <br>
+    <br>
+</body>`;
+        document.write(outStr);
+
+    </script>
+
 </html>
