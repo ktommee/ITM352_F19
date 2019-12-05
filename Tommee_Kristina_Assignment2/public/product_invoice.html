@@ -19,25 +19,33 @@
     let params = (new URL(document.location)).searchParams;
     var quantity = [];
     // form was submitted so process the invoice
-      for (i = 0; i < products.length; i++) {
-        if (params.has(`quantity${i}`)) {
-          a_qty = params.get(`quantity${i}`);
-          quantity[i] = a_qty;
-        }
-    } 
+    for (i = 0; i < products.length; i++) {
+      if (params.has(`quantity${i}`)) {
+        a_qty = params.get(`quantity${i}`);
+        quantity[i] = a_qty;
+      }
+    }
     console.log(quantity);
     // fill out the invoice
 
 
     the_user = params.get("user"); // get value of user 
     if (the_user == null) {
-        // there is no value for the_user
+      // there is no value for the_user
       the_user = "Unknown User";
-      Write = `Sorry ${the_user}, you must log in or register before viewing the invoice!`;
-            document.write(Write);
-
+      Write = `Sorry ${the_user}, you must log in before viewing the invoice!`;
+      document.write(Write);
+    // Source of setTimeout: https://www.w3schools.com/jsref/met_win_settimeout.asp
+      setTimeout(sendURL, 1000); // calls sendURL function after 1 second
       console.log(the_user);
     }
+
+    function sendURL() {
+      window.location.href = "login.html";
+      // send the user to the login page 
+      return;
+    }
+
 
 
   </script>
@@ -47,7 +55,8 @@
 <body>
   <header>
 
-    <h1>Thank you, <script>document.write(the_user);</script>, for purchasing from Simply Fruit Baskets!</h1>
+    <h1>Thank you,
+      <script>document.write(the_user);</script>, for purchasing from Simply Fruit Baskets!</h1>
   </header>
   <table border="2">
     <!-- Creating table headers -->
