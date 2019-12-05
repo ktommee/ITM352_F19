@@ -28,8 +28,10 @@
     console.log(quantity);
     // fill out the invoice
 
-    the_user = params.get("user");
+
+    the_user = params.get("user"); // get value of user 
     if (the_user == null) {
+        // there is no value for the_user
       the_user = "Unknown User";
       Write = `Sorry ${the_user}, you must log in or register before viewing the invoice!`;
             document.write(Write);
