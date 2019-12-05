@@ -25,17 +25,20 @@
         the_user = params.get("user");
         if (the_user == null) {
             the_user = "Unknown User";
+            Write = `Sorry ${the_user}, you must log in or register before viewing the invoice!`;
+            document.write(Write);
             
             console.log(the_user);
         }
-        usernameqstring += `&user=` + the_user;
+
+        usernameqstring += `&user=` + the_user
 
         outStr = `<meta http-equiv="Refresh" content="5;url=/product_invoice.html?${quantityqstring}${usernameqstring}">`;
         document.write(outStr);
     </script>
 
     <script>
-
+    
 
         outStr = `
 </head>
@@ -52,10 +55,5 @@
 </body>`;
         document.write(outStr);
     </script>
-
+        
 </html>
-
-
-<script>
-     //document.write("Sorry, " + the_user, "please sign in to see the invoice!");
-</script>
