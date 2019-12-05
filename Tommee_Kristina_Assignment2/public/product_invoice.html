@@ -31,8 +31,13 @@
     the_user = params.get("user");
     if (the_user == null) {
       the_user = "Unknown User";
+      Write = `Sorry ${the_user}, you must log in or register before viewing the invoice!`;
+            document.write(Write);
+
       console.log(the_user);
     }
+
+
   </script>
 
 </head>
