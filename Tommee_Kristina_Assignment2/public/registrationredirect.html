@@ -1,45 +1,55 @@
+<!-- Author: Kristina Tommee-->
+<!--Description: This is the redirect page that the user will be directed to 
+if they successfully registered. This page is a delayed redirect page that will then direct user to the invoice page -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <link rel="stylesheet" href="products-style.css">
     <script src="./products_data.js"></script>
-    <title>Document</title>
+    <title>Successful Registration</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script>
+
+        // Source: Port Assignment 1 Example
         let params = (new URL(document.location)).searchParams;
-        var quantityqstring = "";
-        var usernameqstring = "";
-        // form was submitted so process the invoice
-        console.log("Got to the loop");
+        var quantityqstring = ""; // initializing variable 
+        var usernameqstring = ""; // initializing variable 
         for (i = 0; i < products.length; i++) {
             if (params.has(`quantity${i}`)) {
+                // there are quantities inputted 
                 a_qty = params.get(`quantity${i}`);
+                // assign quantities to the variable a_qty
                 console.log("Quantity = " + a_qty);
                 quantityqstring += `&quantity${i}=` + a_qty;
+                // creating query string for quantities 
                 console.log(quantityqstring);
-
             }
         }
-        the_user = params.get("user");
+
+        the_user = params.get("user"); // get value of user 
         if (the_user == null) {
+            // there is no value for the_user
             the_user = "Unknown User";
-            Write = `Sorry ${the_user}, you must log in or register before viewing the invoice!`;
-            document.write(Write);
-            
             console.log(the_user);
         }
 
         usernameqstring += `&user=` + the_user
+        // if the_user has a value, create query string 
 
+        // Source: Kazman Assignment 1 example
+        // Source of delayed redirect: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_redirect
         outStr = `<meta http-equiv="Refresh" content="5;url=/product_invoice.html?${quantityqstring}${usernameqstring}">`;
         document.write(outStr);
+        // send the user to the invoice page with quantity and username info stored in query string; will automatically refresh and go to invoice page in 5 seconds
     </script>
 
     <script>
-    
-
+        // Source: Kazman Assignment 1 example
+         // Source of delay redirect: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_redirect
         outStr = `
 </head>
 <body>
@@ -47,6 +57,7 @@
     <br>
     <br>
     <h2>Successful Registration!</h2>
+    
     <p>If you see this message for more than 5 seconds, please click on the link below!</p>
     <p><a href="/product_invoice.html?${quantityqstring}${usernameqstring}">Invoice Page</a></p>
     <br>
@@ -54,6 +65,7 @@
     <br>
 </body>`;
         document.write(outStr);
+    // link that will take the user to invoice with quantity and username info stored in query string
     </script>
-        
+
 </html>
