@@ -46,8 +46,8 @@ app.post("/login.html", function (request, response) {
         return;
       }
       else {
-        //response.redirect("loginredirect2.html")
-        response.redirect("login.html?" + loginqstring);
+        response.redirect("loginredirect2.html?" + loginqstring);
+        //response.redirect("login.html?" + loginqstring);
         console.log("Bad password");
         
         return;
@@ -55,7 +55,7 @@ app.post("/login.html", function (request, response) {
     } else {
       console.log("username doesn't exist");
     }
-    response.redirect("loginredirect1.html"); // send to the register page if the username doesn't exist 
+    response.redirect("loginredirect1.html?" + loginqstring); // send to the register page if the username doesn't exist 
   }
 });
 
