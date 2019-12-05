@@ -25,6 +25,7 @@
         the_user = params.get("user");
         if (the_user == null) {
             the_user = "Unknown User";
+            
             console.log(the_user);
         }
         usernameqstring += `&user=` + the_user;
@@ -39,9 +40,15 @@
         outStr = `
 </head>
 <body>
-    <p>Successful Registration!</p>
+    <br>
+    <br>
+    <br>
+    <h2>Successful Registration!</h2>
     <p>If you see this message for more than 5 seconds, please click on the link below!</p>
     <p><a href="/product_invoice.html?${quantityqstring}${usernameqstring}">Invoice Page</a></p>
+    <br>
+    <br>
+    <br>
 </body>`;
         document.write(outStr);
     </script>
