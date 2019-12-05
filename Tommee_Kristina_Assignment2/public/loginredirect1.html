@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Refresh" content="5;url=/login.html">
     <title>Document</title>
     <link rel="stylesheet" href="products-style.css">
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        var loginqstring = "";
+        the_user = params.get("username");
+        if (the_user == null) {
+            the_user = "Unknown User";
+
+            console.log(the_user);
+        }
+        loginqstring += `&username=` + the_user;
+
+        outStr = `<meta http-equiv="Refresh" content="5;url=/login.html?${loginqstring}">`;
+        document.write(outStr);
+
+    </script>
+
+    <script>
+        outStr = `
 </head>
 <body>
     <br>
-        <br>
-        <br>    
-    <p>Sorry! Username cannot be found. Please type a valid username or register with a new username. </p>
-        <p><a href="/login.html">Login Page</a></p>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-</body>
+    <br>
+    <br>    
+    <h2>Sorry! Username cannot be found. Please type a valid username or register with a new username. </h2>
+        <h3><a href="/login.html?${loginqstring}">Login Page</a></h3>
+    <br>
+    <br>
+</body>`;
+        document.write(outStr);
+
+    </script>
+
 </html>
