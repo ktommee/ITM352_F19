@@ -1,8 +1,6 @@
 <!-- Author: Kristina Tommee-->
-<!-- Description: This is the invoice page for my shop. I decided to create a separate 
-  invoice page rather than generating directly from the server because it kept everything 
-  in a separate place and makes everything look more clean-->
-  
+<!-- Description: This is the register page. Users who don't already have an account my register before going to the invoice-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,126 +12,78 @@
     <title>Register Page</title>
 
     <script>
+        // Source: Port Assignment 1 Example 
         window.onload = function () {
-            let params = (new URL(document.location)).searchParams;
-            the_user = params.get("username");
+            let params = (new URL(document.location)).searchParams; // gets query string + form data
+            the_user = params.get("username"); // store value in username textbox to the variable the_user 
             console.log(the_user);
-            has_errors = false; 
-            if (the_user != null) {
-                register.username.value = the_user;
+            has_errors = false; // initialize variable; assume no errors 
+            if (the_user != null) { // the_user has a value 
+                register.username.value = the_user; // assign the_user value to register form username textbox 
                 if (!usernameValidation(the_user)) {
+                    // username doesn't meet requirements 
                     has_errors = true;
                 }
-                //give an alert if there is an error or redirect to invoice if values are valid
+                //give an alert if there is an error
                 if (has_errors) {
                     alert("Please enter a valid username!");
                 }
             }
-            the_email = params.get("email");
+            the_email = params.get("email"); // store value in email textbox to the variable the_email 
             console.log(the_email);
-            has_errors = false;
-            if (the_email != null) {
-                register.email.value = the_email;
+            has_errors = false; // initialize variable; assume no errors 
+            if (the_email != null) { // the_email has a value 
+                register.email.value = the_email; // assign the_email value to register form email textbox 
                 if (!emailValidation(the_email)) {
                     has_errors = true;
                 }
-                //give an alert if there is an error or redirect to invoice if values are valid
+                //give an alert if there is an error
                 if (has_errors) {
                     alert("Please enter a valid email!");
                 }
             }
-            the_fullname = params.get("fullname");
+            the_fullname = params.get("fullname"); // store value in full name textbox to the variable the_fullname 
             console.log(the_fullname)
-            has_errors = false
-            if (the_fullname != null) {
-                register.fullname.value = the_fullname;
+            has_errors = false // initialize variable; assume no errors 
+            if (the_fullname != null) { // the_fullname has a value 
+                register.fullname.value = the_fullname; // assign the_fullname value to register form full name textbox 
                 if (!fullnameValidation(the_fullname)) {
                     has_errors = true;
                 }
-                //give an alert if there is an error or redirect to invoice if values are valid
+                //give an alert if there is an error
                 if (has_errors) {
                     alert("Please enter a valid full name!");
                 }
             }
-            the_password = params.get("password");
-            has_errors = false;
+            the_password = params.get("password"); // store value in password textbox to the variable the_password 
+            has_errors = false; // initialize variable; assume no errors 
             if (!passwordValidation(the_password)) {
                 has_errors = true;
             }
-            //give an alert if there is an error or redirect to invoice if values are valid
+            //give an alert if there is an error 
             if (has_errors) {
                 alert("Please enter a valid password!");
             }
 
-            the_passwordRepeat = params.get("repeatPassword");
+            the_passwordRepeat = params.get("repeatPassword"); // store value in password repeat textbox to the variable the_passwordRepeat 
             the_password = params.get("password");
-            has_errors = false;
-            if (the_passwordRepeat != the_password){
+            has_errors = false; // initialize variable; assume no errors 
+            if (the_passwordRepeat != the_password) {
                 has_errors = true;
             }
 
-
+            //give an alert if there is an error 
             if (has_errors) {
                 alert("Password repeat doesn't match password!");
             }
 
-            register.registerSubmit.value = "Continue"; 
-            
-            /*the_passwordRepeat = params.get("repeatPassword");
-            if (!passwordRepeatValidation(the_password)) {
-                has_errors = true;
-            }
-            //give an alert if there is an error or redirect to invoice if values are valid
-            if (has_errors) {
-                alert("Passwords must match!");
-            }
-            */
+            // change the value of the registerSubmit button to continue when the page reloads
+            register.registerSubmit.value = "Continue";
+
         }
-        
-        /*
-window.onload = function () {
-               let params = (new URL(document.location)).searchParams;
-               the_user = params.get("username");
-               console.log("Here is " + the_user);
-               if (the_user != null) {
-                   username_errs = usernameValidation(the_user.toLowerCase(), true);
-               }
-               // if the username errors array = 0, meaning that there is nothing in the array, then good! if not, send the array back through the span (document.getElementbyId)
-               if (username_errs.length != 0) {
-                   document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
-               }
-           }
-                    username_errs = usernameValidation(the_user.toLowerCase(), true);
-                }
-                // if the username errors array = 0, meaning that there is nothing in the array, then good! if not, send the array back through the span (document.getElementbyId)
-                if (username_errs.length != 0) {
-                    document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
-                }
-            }
-        */
-        // Source: Port Assignment 1 Example 
-        // Creates an alert when quantity is invalid; directs to invoice if quantity is valid
-        /* window.onload = function () {
-            let params = (new URL(document.location)).searchParams; // gets query string + form data
-            // when form is submitted, check if quantities are valid then redirect to invoice
-            if (params.has('register_submit_button')) {
-                has_errors = false; // assume quantities are valid
-                if (params.has("username")) {
-                    the_user = params.get("username");
-                    register.username.value = the_user;
-                    if (!usernameValidation(the_user)) {
-                        has_errors = true;
-                    }
-                    //give an alert if there is an error or redirect to invoice if values are valid
-                    if (has_errors) {
-                        alert("Please enter only valid quantities.");
-                    }
-                }
-            }
-        }
-        */
+
         // Source: Lab 13 order_page_Ex4.html
-        // Function used along with isNonNegInt to validate non-negative integer; checking the value that is in the textbox
+        // Checking the values of the textbox and placing the errors using the span
         function checkUsername(theTextbox) {
             errs = usernameValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
             document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
@@ -150,12 +100,10 @@ window.onload = function () {
             errs = emailValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
             document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
         }
-        /*function checkPasswordRepeat(theTextbox) {
-            errs = passwordRepeatValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
-            document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
-        }
-        */
+
         // Source: Lab 13 info_server_Ex4.js
+        // Source of functions for validation: https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php
+       
         // validates to make sure that full name meets requirements 
         function usernameValidation(the_user, return_errors = false) {
             var letters = /^[0-9a-zA-Z]+$/;
@@ -175,30 +123,22 @@ window.onload = function () {
         function passwordValidation(the_password, return_errors = false) {
             errors = []; // assume no errors at first
             if (the_password.length < 6) {
+            // password is has less than 6 characters 
                 errors.push('<font color="black">Password must be at least 6 characters long!</font>')
             }
             return return_errors ? errors : (errors.length == 0);
         }
-        // validates password confirmation; should be the same value as password. If not, it displays an alert.
-        /*function passwordRepeatValidation(the_passwordRepeat, return_errors = false) {
-            //the_password = params.get("password");
-            //the_passwordRepeat = params.get("repeatPassword");
-            errors = []; // assume no errors at first
-            //if (the_passwordRepeat != the_password) {
-            if (the_passwordRepeat.value != the_password.value) {
-                errors.push('<font color="black">Password must be the same for both password inputs!</font>')
-            }
-            return return_errors ? errors : (errors.length == 0);
-        }
-        */
+
         // validate fullname checks whether user name input field is provided with alphabates characters. If not, it displays an alert 
         function fullnameValidation(the_Fullname, return_errors = false) {
             errors = []; // assume no errors at first
             var letters = /^[A-Za-z ]+$/;
             if (!the_Fullname.match(letters)) {
+                // full name includes a character that is not defined in the letters variable 
                 errors.push('<font color="black">Username can only contain letters</font>');
             }
             if (the_Fullname.length > 30) {
+                // full name has more than 30 characters 
                 errors.push('<font color="black">Full name must be less than 30 characters long!</font>');
             }
             return return_errors ? errors : (errors.length == 0);
@@ -208,6 +148,7 @@ window.onload = function () {
             errors = []; // assume no errors at first
             var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (!the_email.match(mailformat)) {
+                // email is not written in the right format
                 errors.push('<font color="black">You have entered an invalid email address!</font>');
             }
             return return_errors ? errors : (errors.length == 0);
@@ -224,7 +165,7 @@ window.onload = function () {
     <br>
     <br>
 
-
+ <!-- Source: Lab 14 exercise 4 and Kazman Assignment 1 example (onkeyup)-->
     <form name="register" action="" method="POST">
         <input type="text" name="fullname" size="40" placeholder="enter full name (First Name Last Name)"
             onkeyup="checkFullname(this);"><span id="fullname_span"></span><br />
@@ -232,14 +173,12 @@ window.onload = function () {
             id="username_span"></span><br />
         <input type="password" name="password" size="40" placeholder="enter password"
             onkeyup="checkPassword(this);"><span id="password_span"></span><br />
-        <input type="password" name="repeatPassword" size="40" placeholder="enter password again"><span id="repeatPassword_span"></span><br />
+        <input type="password" name="repeatPassword" size="40" placeholder="enter password again"><span
+            id="repeatPassword_span"></span><br />
         <input type="email" name="email" size="40" placeholder="enter email" onkeyup="checkEmail(this);"><span
             id="email_span"></span><br />
-            <input type="submit" value="Submit" name= "registerSubmit"><span id="button_span"></span>
+        <input type="submit" value="Submit" name="registerSubmit"><span id="button_span"></span>
     </form>
-
-    <script>
-    </script>
 
     <br>
     <br>
@@ -248,88 +187,3 @@ window.onload = function () {
 </body>
 
 </html>
-
-<script>
-        // Source: Port Assignment 1 Example 
-        // Creates an alert when quantity is invalid; directs to invoice if quantity is valid
-    /* window.onload = function () {
-let params = (new URL(document.location)).searchParams; // gets query string + form data
-// when form is submitted, check if quantities are valid then redirect to invoice
-if (params.has('register_submit_button')) {
- has_errors = false; // assume inputs are valid
- for (i = 0; i < products.length; i++) {
-     if (params.has(`quantity${i}`)) {
-         a_qty = params.get(`quantity${i}`);
-         // make textboxes sticky in case of invalid data
-         quantity_form[`quantity${i}`].value = a_qty;
-         total_qty += a_qty;
-         if (!isNonNegInt(a_qty)) {
-             has_errors = true; // if there is invalid quantity
-         }
-     }
- }
- //give an alert if there is an error or redirect to invoice if values are valid
- if (has_errors) {
-     alert("Please enter only valid quantities.");
- } else if (total_qty == 0) { //alert for no quantities chosen
-     alert("Please select some quantities for the items you want to purchase.");
- } else { // redirecting to invoice when quantities are valid
-     window.location = `./product_invoice.html${document.location.search}`;
-     window.stop;
- }
-}
-}
- // Source: Lab 13 order_page_Ex4.html
-        // Function used along with isNonNegInt to validate non-negative integer; checking the value that is in the textbox
-        //function check(theTextbox) {
-            //errs = usernameValidation(theTextbox.value, true); // don't want a boolean; want the actual errors array
-            //document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
-        }
-        //document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
-  window.onload = function () {
-            let params = (new URL(document.location)).searchParams; // gets query string + form data
-            // when form is submitted, check if quantities are valid then redirect to invoice
-            has_errors = false; // assume quantities are valid
-            if (params.has("username")) {
-                    the_user = params.get("username");
-                    register["username"].value = the_user;
-            if(!usernameValidation(the_user)){
-                has_errors = true;
-            }
-            //give an alert if there is an error or redirect to invoice if values are valid
-            if (has_errors) {
-                alert("Please enter only valid quantities.");
-            }
-        }
-        }
-        window.onload = function () {
-               let params = (new URL(document.location)).searchParams;
-               the_user = params.get("username");
-               console.log("Here is " + the_user);
-               if (the_user != null) {
-                   username_errs = usernameValidation(the_user.toLowerCase(), true);
-               }
-               // if the username errors array = 0, meaning that there is nothing in the array, then good! if not, send the array back through the span (document.getElementbyId)
-               if (username_errs.length != 0) {
-                   document.getElementById(theTextbox.name + '_span').innerHTML = errs.join(", "); // get the errors array and turn it into a string
-               }
-           }
-     let params = (new URL(document.location)).searchParams;
-        the_user = params.get("username");
-        the_password = params.get("password");
-        the_fullname = params.get("fullname");
-        the_email = params.get("email");
-        if (the_user != null) {
-            login.username.value = the_user;
-        }
-        if (the_password != null) {
-            login.password.value = the_password;
-        }
-        if (the_fullname != null) {
-            login.fullname.value = the_fullname;
-        }
-        if (the_email != null) {
-            login.email.value = the_email;
-        }
-*/
-</script>
